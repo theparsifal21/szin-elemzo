@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Szín Elemző</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f0f0f">
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="title">Szín Elemző</h1>
+
+        <p class="subtitle">
+            Írj be egy nevet és nézd meg a színek eloszlását.
+        </p>
+
+        <div class="input-group">
+
+            <input
+                type="text"
+                id="nameInput"
+                placeholder="Add meg a nevet"
+            >
+
+            <button id="analyzeBtn">
+                Elemzés
+            </button>
+
+        </div>
+
+        <div id="results"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
