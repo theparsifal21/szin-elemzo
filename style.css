@@ -114,7 +114,7 @@ button:active {
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.result-row:last-child {
+.rows-container .result-row:last-child {
     border-bottom: none;
 }
 
@@ -138,9 +138,11 @@ button:active {
     font-variant-numeric: tabular-nums; /* Keeps numbers aligned */
 }
 
+/* Merged warning styles */
 .warning {
     padding: 18px;
     color: #ff7675;
     font-size: 0.95rem;
-    background: rgba(255, 118, 117, 0.1); /* Soft background for errors */
+    background: rgba(255, 118, 117, 0.1); 
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Smooth divider if warning is present */
 }

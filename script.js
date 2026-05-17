@@ -46,11 +46,18 @@ const input = document.getElementById("nameInput");
 const button = document.getElementById("analyzeBtn");
 const results = document.getElementById("results");
 
+// Listeners
 button.addEventListener("click", analyze);
+input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        analyze();
+    }
+});
 
 function analyze() {
     const nev = input.value.trim().toLowerCase();
 
+    // Clear previous results unconditionally
     results.innerHTML = "";
 
     if (!nev) return;
@@ -63,21 +70,26 @@ function analyze() {
     }
 
     for (const betu of nev) {
-
         if (betu === " ") continue;
 
         if (betuSzin[betu]) {
             szamlalo[betuSzin[betu]]++;
         } else {
-            unknown.push(betu);
+            // Avoid duplicating the same unknown character in the warning box
+            if (!unknown.includes(betu)) {
+                unknown.push(betu);
+            }
         }
     }
 
     const card = document.createElement("div");
     card.className = "result-card";
 
-    szinSorrend.forEach(szin => {
+    // Create a container specifically for rows so CSS :last-child remains accurate
+    const rowsContainer = document.createElement("div");
+    rowsContainer.className = "rows-container";
 
+    szinSorrend.forEach(szin => {
         const row = document.createElement("div");
         row.className = "result-row";
 
@@ -87,26 +99,22 @@ function analyze() {
                     class="color-dot"
                     style="background:${szinHex[szin]}"
                 ></div>
-
                 <span>${szin}</span>
             </div>
-
             <span class="count">${szamlalo[szin]}</span>
         `;
-
-        card.appendChild(row);
+        rowsContainer.appendChild(row);
     });
+    
+    card.appendChild(rowsContainer);
 
     if (unknown.length > 0) {
-
         const warning = document.createElement("div");
         warning.className = "warning";
-
         warning.innerHTML = `
             Ismeretlen karakterek: 
             <b>${unknown.join(", ")}</b>
         `;
-
         card.appendChild(warning);
     }
 
