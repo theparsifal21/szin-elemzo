@@ -230,14 +230,10 @@ shareBtn.addEventListener('click', async () => {
   const original = shareBtn.textContent;
   const canvas = await renderImage(last);
   const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
-  const file = new File([blob], 'szin-elemzo.png', { type: 'image/png' });
-
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    try { await navigator.share({ files: [file], title: 'Szín Elemző' }); } catch (e) {}
-    return;
-  }
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob); a.download = 'szin-elemzo.png'; a.click();
+  a.href = URL.createObjectURL(blob);
+  a.download = 'szin-elemzo.png';
+  document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   shareBtn.textContent = 'Kép mentve';
   setTimeout(() => { shareBtn.textContent = original; }, 1800);

@@ -1,4 +1,4 @@
-const cacheName = 'szin-elemzo-v5';
+const cacheName = 'szin-elemzo-v6';
 const assets = [
   './', './index.html', './style.css', './script.js', './manifest.json',
   './hatter.png', './icon-192.png', './icon-512.png'
